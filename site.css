@@ -1,0 +1,1401 @@
+/* ==========================================================================
+   site.css — Full stylesheet for HyMall landing page (ready-to-drop)
+   ========================================================================== */
+
+/* ===== RESET & BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fff;
+    color: #000;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 5%;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.logo img {
+    height: 40px;
+    display: block;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 1.8rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    cursor: pointer;
+}
+
+    .nav-link:hover {
+        color: #651FFF;
+    }
+
+    .nav-link.active {
+        color: #651FFF;
+    }
+
+.login-btn a {
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.4rem 1.2rem;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+    .login-btn a:hover {
+        border-color: #651FFF;
+        color: #651FFF;
+    }
+
+/* ===== HERO SECTION ===== */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9rem 5% 6rem;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* left text area: increased width so headline fits */
+.hero-content {
+    max-width: 58%;
+    position: relative;
+    z-index: 200; /* ensure text sits above decorative bubbles */
+}
+
+    /* Headline tweaks: avoid hyphenation and unpredictable breaks */
+    .hero-content h1 {
+        font-size: 3.2rem;
+        font-weight: 800;
+        line-height: 1.05;
+        margin-bottom: 1.2rem;
+        color: #0b0b0b;
+        hyphens: none;
+        word-break: normal;
+        overflow-wrap: normal;
+    }
+
+/* gradient phrase: keep together and prevent wrapping */
+.gradient-text {
+    display: inline-block;
+    white-space: nowrap;
+    background: linear-gradient(90deg, #651FFF, #3382FF, #F8BBD0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* subheading */
+.hero-sub {
+    font-size: 1.08rem;
+    margin-bottom: 1.8rem;
+    color: #555;
+    max-width: 720px;
+}
+
+/* CTA buttons */
+.cta-buttons {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 0.8rem 2.2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #651FFF;
+    color: white;
+    border: none;
+}
+
+    .btn-primary:hover {
+        background-color: #5419d8;
+        transform: translateY(-2px);
+    }
+
+.btn-secondary {
+    background: transparent;
+    color: #000;
+    border: 2px solid #ddd;
+}
+
+    .btn-secondary:hover {
+        border-color: #651FFF;
+        color: #651FFF;
+    }
+
+/* ===== BUBBLES: confined to hero right-zone ===== */
+/* right-side container */
+.hero-right {
+    position: absolute;
+    right: 5%;
+    top: 6%;
+    width: 42%;
+    height: 88%;
+    pointer-events: none;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    z-index: 5; /* below hero-content */
+}
+
+/* bubble container anchored inside hero-right and clipped */
+#bubbles-root {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* CRITICAL: clip bubbles so they can't escape hero area */
+    pointer-events: none;
+    z-index: 50;
+}
+
+/* individual bubble (masked piece of the large image) */
+.bubble {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    will-change: transform;
+    pointer-events: none;
+    filter: drop-shadow(0 18px 26px rgba(0,0,0,0.12));
+    transform-origin: center center;
+    transition: transform 120ms linear;
+}
+
+/* fallback - ensure any legacy bubble-fixed doesn't float above content */
+.bubble-fixed {
+    position: absolute !important;
+    z-index: 5 !important;
+    pointer-events: none;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .bubble {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* ===== Overview row across bottom of hero (mockup-accurate) ===== */
+.overview-row {
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    bottom: 6%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0;
+    z-index: 200; /* above bubbles, same stacking as hero-content (200) */
+    pointer-events: auto;
+    min-height: 88px;
+}
+
+/* each item: no card background, no shadow, text only */
+.overview-item {
+    flex: 1 1 0;
+    padding: 0 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    min-width: 0;
+}
+
+    /* heading + copy */
+    .overview-item h4 {
+        margin: 0 0 6px 0;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #111;
+    }
+
+    .overview-item p {
+        margin: 0;
+        font-size: 0.95rem;
+        color: #666;
+    }
+
+    /* vertical separators: thin line to left of every item except first */
+    .overview-item + .overview-item {
+        position: relative;
+    }
+
+        .overview-item + .overview-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 14%;
+            bottom: 14%;
+            width: 1px;
+            background: rgba(0,0,0,0.08);
+            transform: translateX(-14px);
+        }
+
+.overview-row .overview-item:first-child {
+    padding-left: 0;
+}
+
+.overview-row .overview-item:last-child {
+    padding-right: 0;
+}
+
+/* ===== FEATURES, ABOUT, DEMO, FAQ, FOOTER ===== */
+.features {
+    display: flex;
+    justify-content: space-around;
+    padding: 5rem 5%;
+    background-color: #fafafa;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.feature-card {
+    flex: 1;
+    padding: 2.2rem;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    text-align: center;
+    max-width: 300px;
+    min-width: 220px;
+    margin: 0 8px;
+}
+
+    .feature-card h3 {
+        font-size: 1.6rem;
+        margin-bottom: 0.8rem;
+        color: #333;
+    }
+
+    .feature-card p {
+        color: #666;
+        font-size: 1rem;
+    }
+
+.about-section, .demo-section, .faq-section {
+    padding: 5rem 5%;
+    background-color: #fff;
+}
+
+.section-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+    .section-content h2 {
+        font-size: 2.4rem;
+        margin-bottom: 1.5rem;
+        color: #222;
+    }
+
+    .section-content p {
+        font-size: 1.1rem;
+        color: #555;
+        margin-bottom: 2rem;
+    }
+
+.demo-placeholder {
+    background: #f5f5f5;
+    padding: 3rem;
+    border-radius: 12px;
+    margin-top: 1.5rem;
+    color: #888;
+    font-weight: 600;
+}
+
+.faq-item {
+    text-align: left;
+    margin: 2rem auto;
+    max-width: 700px;
+}
+
+    .faq-item h4 {
+        font-size: 1.3rem;
+        margin-bottom: 0.6rem;
+        color: #333;
+    }
+
+.main-footer {
+    text-align: center;
+    padding: 2rem;
+    background: #f9f9f9;
+    color: #777;
+    font-size: 0.95rem;
+    margin-top: 2rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .hero-right {
+        right: 4%;
+        width: 44%;
+        height: 80%;
+        top: 7%;
+    }
+
+    #bubbles-root {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero {
+        flex-direction: column;
+        padding-top: 10rem;
+        text-align: center;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        margin-bottom: 2.5rem;
+        z-index: 300;
+    }
+
+    .hero-right {
+        position: relative;
+        width: 100%;
+        height: auto;
+        margin-top: 1.5rem;
+        justify-content: center;
+    }
+
+    #bubbles-root {
+        display: none;
+    }
+    /* hide decoration on tablet for clarity */
+    .overview-row {
+        position: relative;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 1.2rem auto 0;
+        width: 92%;
+        display: flex;
+        gap: 12px;
+        z-index: 300;
+        flex-wrap: nowrap;
+    }
+
+    .overview-item {
+        flex: 1 1 0;
+        padding: 10px 12px;
+        text-align: center;
+    }
+
+        .overview-item + .overview-item::before {
+            display: none;
+        }
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.6rem;
+    }
+
+    .cta-buttons {
+        justify-content: center;
+    }
+
+    .hero-right {
+        display: none;
+    }
+    /* hide right decorations for narrow screens */
+}
+
+@media (max-width: 576px) {
+    .navbar {
+        padding: 1rem 3%;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .btn-primary, .btn-secondary {
+        width: 100%;
+    }
+
+    .overview-row {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 16px;
+    }
+
+    .overview-item {
+        text-align: left;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 420px) {
+    .hero-content h1 {
+        font-size: 1.9rem;
+        line-height: 1.1;
+    }
+
+    .section-content {
+        padding: 0 1rem;
+    }
+}
+
+/* final safeguard: active nav color */
+.nav-link.active {
+    color: #651FFF !important;
+}
+
+
+
+/* ================= FEATURES SECTION (mockup-accurate) ================== */
+
+.features-section {
+    position: relative;
+    padding: 4.5rem 5rem 4.5rem; /* top spacing after hero + breathing room */
+    background-color: #fff;
+    overflow: visible;
+}
+
+/* big faint FEATURES mark behind headline */
+.features-mark {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 8rem;
+    font-weight: 800;
+    letter-spacing: 10px;
+    color: rgba(100,80,140,0.08); /* very faint lavender */
+    pointer-events: none;
+    user-select: none;
+    z-index: 1;
+    white-space: nowrap;
+}
+
+/* headline block above the feature rows */
+.features-hero {
+    max-width: 1100px;
+    margin: 2.2rem auto 1.8rem;
+    position: relative;
+    z-index: 30; /* above mark */
+    text-align: center;
+}
+
+/* smaller headline styling (centered) */
+.features-headline h3 {
+    font-size: 2rem;
+    margin: 0 0 10px;
+    color: #111;
+    font-weight: 800;
+    line-height: 1.08;
+}
+
+/* decorative dot + tiny line under headline */
+
+
+/* container for rows */
+.features-list {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    gap: 3.2rem;
+    z-index: 20;
+    position: relative;
+    padding-top: 4rem; /* ? Adds space between headline and first row */
+}
+
+/* each feature row: two-column layout */
+.feature-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+    /* reverse class swaps order (image on right) */
+    .feature-row.reverse {
+        direction: rtl; /* easiest swap for markup */
+    }
+
+        .feature-row.reverse .feature-media,
+        .feature-row.reverse .feature-content {
+            direction: ltr; /* keep internal text direction normal */
+        }
+
+/* media: the image */
+.feature-media img {
+    width: 100%;
+    height: 100%;
+    max-width: 420px; /* controls image size like mockup */
+    object-fit: cover;
+    display: block;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(7,11,43,0.06);
+}
+
+/* content column */
+.feature-content {
+    padding: 0 1rem;
+}
+
+    .feature-content h4 {
+        margin: 0 0 .6rem 0;
+        font-size: 1.05rem;
+        color: #0b6f6a; /* teal-ish heading color */
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        line-height: 1.2; /* ? Tighten line height for better visual alignment */
+        vertical-align: middle; /* Optional: reinforces alignment */
+    }
+
+    .feature-content p {
+        margin: 0;
+        color: #222;
+        line-height: 1.5;
+    }
+
+/* small circular bullet to left of each heading */
+.feature-bullet {
+    width: 8px;
+    height: 8px;
+    background: #6fe0d6;
+    display: inline-block;
+    border-radius: 50%;
+    flex: 0 0 auto;
+    margin-top: 0; /* Explicitly reset */
+    margin-bottom: 0;
+}
+
+/* decorative abstract art on the right as a soft overlay */
+.features-section::after {
+    content: "";
+    position: absolute;
+    top: -4%;
+    right: -23%;
+    width: 50vw;
+    height: 99vh;
+    background-image: url("/images/features-abstract.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top right;
+    opacity: 0.9;
+    pointer-events: none;
+    filter: blur(19px) saturate(120%);
+    z-index: 2;
+}
+
+/* RESPONSIVE: shrink / stack on smaller screens */
+@media (max-width: 992px) {
+    .features-section {
+        padding: 4rem 4% 3rem;
+    }
+
+    .features-mark {
+        font-size: 5rem;
+        top: -10px;
+    }
+
+    .features-list {
+        gap: 2rem;
+    }
+
+    .feature-row {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+
+        .feature-row.reverse {
+            direction: ltr;
+        }
+    /* cancel reverse on stacked */
+    .feature-media img {
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .features-section::after {
+        display: none;
+    }
+    /* hide abstract on small */
+    .features-hero {
+        margin-bottom: 1.4rem;
+    }
+}
+
+/* smaller phones: tighter spacing */
+@media (max-width: 576px) {
+    .features-headline h3 {
+        font-size: 1.6rem;
+    }
+
+    .feature-content h4 {
+        font-size: 1rem;
+    }
+
+    .features-section {
+        padding: 3rem 3% 2rem;
+    }
+}
+
+
+/* ================= ABOUT SECTION ================= */
+.about-section {
+    position: relative;
+    padding: 4.5rem 5rem 4.5rem;
+    background-color: #fff;
+    overflow: visible;
+}
+
+/* big faint About Us mark behind headline (like features-mark) */
+.about-mark {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 8rem;
+    font-weight: 800;
+    letter-spacing: 10px;
+    color: rgba(100,80,140,0.08); /* faint lavender */
+    pointer-events: none;
+    user-select: none;
+    z-index: 1;
+    white-space: nowrap;
+}
+
+/* headline block (centered, above content) */
+.about-hero {
+    max-width: 1100px;
+    margin: 2.2rem auto 1.8rem;
+    position: relative;
+    z-index: 30; /* above mark */
+    text-align: center;
+}
+
+.about-headline h3 {
+    font-size: 2rem;
+    margin: 0;
+    color: #111;
+    font-weight: 800;
+    line-height: 1.08;
+}
+
+/* container for the centered copy */
+.about-list {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1.6rem;
+    z-index: 20;
+    position: relative;
+    padding-top: 1.2rem;
+    justify-items: center; /* centers the about-content horizontally */
+}
+
+/* the actual text block centered in the middle */
+.about-content {
+    width: 100%;
+    max-width: 760px; /* content width */
+    text-align: center; /* MUST be centered per your instruction */
+    padding: 0 1rem;
+    z-index: 40; /* above decorative art */
+    position: relative;
+}
+
+    .about-content p {
+        margin: 0 0 1.2rem 0;
+        color: #333;
+        font-size: 1.05rem;
+        line-height: 1.8;
+    }
+
+/* top-left decorative abstract (uses same logic as features ::after but left/top) */
+.about-section::before {
+    content: "";
+    position: absolute;
+    top: -6%;
+    left: -12%;
+    width: 42vw;
+    height: 70vh;
+    background-image: url("/images/features-abstract.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top left;
+    opacity: 0.95;
+    pointer-events: none;
+    filter: blur(16px) saturate(110%);
+    z-index: 2; /* behind the content and the big wordmark (wordmark z:1, content z:40) */
+}
+
+/* RESPONSIVE: hide the decorative abstract and scale mark on smaller screens */
+@media (max-width: 992px) {
+    .about-section {
+        padding: 3.5rem 4% 3.5rem;
+    }
+
+    .about-mark {
+        font-size: 5.8rem;
+        top: -12px;
+    }
+
+    .about-section::before {
+        display: none; /* remove art on tablet/mobile to keep layout clean */
+    }
+
+    .about-list {
+        padding-top: 0.6rem;
+    }
+
+    .about-content {
+        max-width: 92%;
+    }
+
+    .about-headline h3 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .about-hero {
+        margin: 1.4rem auto 1rem;
+    }
+
+    .about-mark {
+        display: none;
+    }
+    /* hide huge background wordmark on small screens */
+    .about-headline h3 {
+        font-size: 1.25rem;
+    }
+
+    .about-content p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+}
+
+
+/* ================= DEMO SECTION ================= */
+.demo-section {
+    position: relative;
+    padding: 3.5rem 4rem 3.5rem;
+    background-color: #fff;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Big faint DEMO mark behind headline */
+.demo-mark {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 8rem;
+    font-weight: 800;
+    letter-spacing: 10px;
+    color: rgba(100,80,140,0.08);
+    pointer-events: none;
+    user-select: none;
+    z-index: 1;
+    white-space: nowrap;
+}
+
+/* Center headline */
+.demo-hero {
+    max-width: 1100px;
+    margin: 2.2rem auto 1.8rem;
+    position: relative;
+    z-index: 30;
+}
+
+.demo-headline h3 {
+    font-size: 2rem;
+    margin: 0;
+    color: #111;
+    font-weight: 800;
+    line-height: 1.08;
+}
+
+/* Placeholder text area */
+.demo-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 40;
+}
+
+    .demo-content p {
+        font-size: 1.05rem;
+        color: #333;
+        line-height: 1.8;
+    }
+
+/* Responsive */
+@media (max-width: 992px) {
+    .demo-section {
+        padding: 3.5rem 4% 3.5rem;
+    }
+
+    .demo-mark {
+        font-size: 5.8rem;
+        top: -12px;
+    }
+
+    .demo-headline h3 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .demo-mark {
+        display: none;
+    }
+
+    .demo-headline h3 {
+        font-size: 1.3rem;
+    }
+
+    .demo-content p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+}
+
+
+/* ================= FAQ SECTION — tightened spacing / corrected sizes ================== */
+
+.faq-section {
+    position: relative;
+    padding: 3rem 3rem 3.5rem;
+    background-color: #fff;
+    overflow: visible;
+}
+
+/* FAINT "FAQ" WATERMARK BEHIND HEADLINE */
+.faq-mark {
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 8.2rem;
+    font-weight: 800;
+    letter-spacing: 10px;
+    color: rgba(100,80,140,0.08);
+    pointer-events: none;
+    user-select: none;
+    z-index: 1;
+}
+
+/* HEADLINE: increase bottom gap so intro box is clearly separated from watermark */
+.faq-hero {
+    max-width: 1100px;
+    margin: 6.2rem auto 2.6rem; /* <-- increased top and bottom spacing for clear separation */
+    position: relative;
+    z-index: 30;
+    text-align: center;
+}
+
+.faq-headline h3 {
+    font-size: 2.3rem;
+    margin: 0;
+    color: #111;
+    font-weight: 800;
+    line-height: 1.05;
+}
+
+/* LAYOUT: fixed left column for image, right column grows naturally (no internal scroll) */
+.faq-content {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 440px 1fr; /* <-- slightly narrower left column to reduce image dominance */
+    gap: 3rem;
+    align-items: start;
+    position: relative;
+    z-index: 20;
+}
+
+/* LEFT: image — scaled down a bit to match mockup */
+.faq-art {
+    position: relative;
+    align-self: start;
+    text-align: left;
+    padding-left: 0.2rem;
+}
+
+.faq-image {
+    width: 100%;
+    max-width: 520px; /* <-- reduced from 460px */
+    height: auto;
+    display: block;
+    margin: 0;
+}
+
+/* Hide any leftover Visit FAQ Center button if present in old markup */
+.faq-visit-btn {
+    display: none !important;
+}
+
+/* RIGHT: accordion (normal flow) */
+.faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+/* PURPLE INTRO BOX */
+.faq-intro {
+    background: linear-gradient(90deg, #651FFF, #3382FF);
+    padding: 1.15rem 1.4rem;
+    border-radius: 12px;
+    color: white;
+    box-shadow: 0 6px 18px rgba(101,31,255,0.12);
+    margin-bottom: 0.6rem; /* small gap before first card */
+}
+
+    .faq-intro h4 {
+        margin: 0 0 6px;
+        font-size: 1.05rem;
+        font-weight: 700;
+    }
+
+    .faq-intro p {
+        margin: 0;
+        font-size: 0.95rem;
+        opacity: 0.98;
+    }
+
+/* FAQ LIST: TIGHT spacing like your mockup */
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.58rem; /* <-- much smaller gap between cards */
+}
+
+/* GREY CARDS */
+.faq-item {
+    background: #f2f2f2;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(8,12,24,0.03);
+    border: 1px solid rgba(0,0,0,0.03);
+    /* remove any implicit margins that might add extra spacing */
+    margin: 0;
+}
+
+/* QUESTION row: slightly reduced vertical padding to tighten rows */
+.faq-question {
+    width: 100%;
+    padding: 0.7rem 1.1rem; /* <-- reduced from 1.1rem */
+    text-align: left;
+    background: transparent;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: #111;
+    cursor: pointer;
+}
+
+    .faq-question:hover {
+        background: rgba(255,255,255,0.02);
+    }
+
+.faq-arrow {
+    display: inline-block;
+    width: 22px;
+    text-align: center;
+    transition: transform .22s ease;
+    color: #333;
+    font-weight: 700;
+}
+
+/* ANSWERS: hidden by default, shown only when active */
+.faq-answer {
+    display: none;
+    padding: 0 1.2rem 0.9rem;
+    background: transparent;
+}
+
+    .faq-answer p {
+        margin: 0;
+        color: #444;
+        line-height: 1.55;
+        font-size: 0.95rem;
+    }
+
+/* ACTIVE: reveal answer */
+.faq-item.active .faq-answer {
+    display: block;
+}
+
+/* rotate arrow when open */
+.faq-item.active .faq-arrow {
+    transform: rotate(180deg);
+}
+
+/* CONTACT CTA centered below */
+.faq-contact-centered {
+    display: flex;
+    justify-content: center;
+    margin-top: 3.2rem;
+    z-index: 30;
+}
+
+.faq-contact {
+    width: 100%;
+    max-width: 640px;
+    text-align: center;
+    padding: 1.6rem 1.2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 28px rgba(8,12,24,0.05);
+}
+
+    .faq-contact h4 {
+        margin: 0 0 8px;
+        font-size: 1.25rem;
+        color: #111;
+        font-weight: 800;
+    }
+
+    .faq-contact p {
+        margin: 0 0 1rem;
+        color: #555;
+        font-size: 1rem;
+    }
+
+.btn-secondary {
+    padding: 0.7rem 1.8rem;
+    border-radius: 999px;
+    background: transparent;
+    border: 2px solid #ddd;
+    color: #000;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+/* Soft abstract blur */
+.faq-section::after {
+    content: "";
+    position: absolute;
+    top: -4%;
+    right: -20%;
+    width: 50vw;
+    height: 99vh;
+    background-image: url("/images/features-abstract.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top right;
+    opacity: 0.85;
+    pointer-events: none;
+    filter: blur(19px) saturate(120%);
+    z-index: 2;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .faq-hero {
+        margin-bottom: 1.2rem;
+    }
+
+    .faq-content {
+        grid-template-columns: 1fr;
+        gap: 1.4rem;
+    }
+
+    .faq-art {
+        text-align: center;
+        padding-left: 0;
+    }
+
+    .faq-image {
+        max-width: 360px;
+        margin: 0 auto;
+    }
+
+    .faq-accordion {
+        padding-right: 0;
+    }
+
+    .faq-list {
+        gap: 4.5rem;
+    }
+
+    .faq-contact-centered {
+        margin-top: 2rem;
+    }
+
+    .faq-section::after {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .faq-headline h3 {
+        font-size: 1.6rem;
+    }
+
+    .faq-image {
+        max-width: 260px;
+    }
+
+    .faq-intro p {
+        font-size: 0.9rem;
+    }
+
+    .faq-question {
+        font-size: 0.95rem;
+        padding: 0.85rem 1rem;
+    }
+
+    .faq-answer p {
+        font-size: 0.92rem;
+    }
+
+    .faq-contact {
+        padding: 1.1rem 0.9rem;
+    }
+
+    .faq-list {
+        gap: 0.5rem;
+    }
+}
+
+
+/* ================= FOOTER SECTION (MATCHES MOCKUP EXACTLY) ================== */
+
+.main-footer {
+    position: relative;
+    padding: 4rem 5% 3rem;
+    background-color: #fff;
+    overflow: hidden; /* Critical: clips the blur so it doesn't escape footer */
+    z-index: 1;
+}
+
+    /* SOFT ABSTRACT BLUR IMAGE AT BOTTOM — CENTERED, NOT STRETCHED */
+    .main-footer::before {
+        content: "";
+        position: absolute;
+        top: -4%;
+        right: -20%;
+        width: 200vw;
+        height: 150vh;
+        background-image: url("/images/features-abstract.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: top right;
+        opacity: 0.85;
+        pointer-events: none;
+        filter: blur(19px) saturate(120%);
+        z-index: 2;
+    }
+
+/* MAIN CONTENT: FLEX LAYOUT */
+.footer-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 3rem;
+    position: relative;
+    z-index: 30; /* Above blur */
+}
+
+/* CENTER: LINK COLUMNS */
+.footer-links {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+}
+
+.link-column {
+    min-width: 140px;
+}
+
+    .link-column h4 {
+        font-size: 0.95rem;
+        color: #651FFF;
+        font-weight: 700;
+        margin: 0 0 1rem 0;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    .link-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .link-column li {
+        margin: 0.6rem 0;
+    }
+
+    .link-column a {
+        color: #333;
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: color 0.2s ease;
+    }
+
+        .link-column a:hover {
+            color: #651FFF;
+        }
+
+    /* LEGAL LINKS — DISABLED (GRAYED OUT, NO CLICK) */
+    .link-column:nth-child(3) a,
+    .link-column:nth-child(3) span {
+        color: #999;
+        pointer-events: none;
+        cursor: default;
+        text-decoration: none;
+    }
+
+/* BOTTOM: COPYRIGHT */
+.footer-bottom {
+    max-width: 1100px;
+    margin: 2rem auto 0;
+    text-align: left;
+    font-size: 0.85rem;
+    color: #555;
+    position: relative;
+    z-index: 30;
+}
+
+    .footer-bottom p {
+        margin: 0;
+        line-height: 1.4;
+    }
+
+/* RESPONSIVE: MOBILE ADJUSTMENTS */
+@media (max-width: 992px) {
+    .main-footer {
+        padding: 3rem 4% 2rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+    }
+
+    .link-column {
+        min-width: auto;
+        text-align: center;
+    }
+
+    .footer-bottom {
+        margin-top: 1.5rem;
+        text-align: center;
+    }
+
+    .main-footer::before {
+        display: none; /* Hide blur on small screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .main-footer {
+        padding: 2.5rem 3% 2rem;
+    }
+
+    .footer-content {
+        gap: 1.6rem;
+    }
+
+    .footer-logo img {
+        height: 45px;
+    }
+
+    .footer-links {
+        gap: 1.6rem;
+    }
+
+    .link-column h4 {
+        font-size: 0.9rem;
+    }
+
+    .link-column a {
+        font-size: 0.9rem;
+    }
+
+    .footer-bottom {
+        margin-top: 1.2rem;
+        font-size: 0.8rem;
+    }
+}

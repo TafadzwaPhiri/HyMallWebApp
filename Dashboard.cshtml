@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Tenant Dashboard";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .tenant-dashboard {
+            background: #f9fafc;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .tenant-header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 1.2rem 5%;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .welcome-text {
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .tenant-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 70px);
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .tenant-message {
+            max-width: 700px;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+            .tenant-message h1 {
+                font-size: 1.8rem;
+                margin-bottom: 1.2rem;
+                color: #0b0b0b;
+                font-weight: 700;
+            }
+
+            .tenant-message p {
+                font-size: 1.1rem;
+                color: #555;
+                line-height: 1.6;
+            }
+    </style>
+</head>
+<body class="tenant-dashboard">
+    <!-- Header with Welcome message -->
+    <div class="tenant-header">
+        <div class="welcome-text">Welcome, @ViewBag.UserName!</div>
+        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/Home/ChooseRole" method="post" style="margin: 0;">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+
+    <!-- Main content -->
+    <div class="tenant-content">
+        <div class="tenant-message">
+            <h1>Tenant Dashboard</h1>
+            <p>This dashboard is a lightweight prototype representing where tenant functionality would live. We will add more features later.</p>
+        </div>
+    </div>
+
+    <script src="~/js/site.js"></script>
+</body>
+</html>

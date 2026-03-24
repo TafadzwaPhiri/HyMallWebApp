@@ -1,0 +1,260 @@
+﻿@* Areas/Admin/Views/Shared/_AdminLayout.cshtml *@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f8f9ff;
+        }
+
+        /* Sidebar */
+        .admin-sidebar {
+            width: 260px;
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 0 12px rgba(0,0,0,0.05);
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+            z-index: 9999; /* ensure sidebar sits above page decorations */
+            pointer-events: auto !important; /* re-enable clicks if something disabled them */
+        }
+
+        .admin-logo {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+
+            .admin-logo img {
+                height: 40px;
+            }
+
+        .admin-nav {
+            list-style: none;
+            padding: 0 15px;
+            margin: 0;
+        }
+
+            .admin-nav li {
+                margin-bottom: 8px;
+            }
+
+            .admin-nav a {
+                color: #333;
+                text-decoration: none;
+                padding: 12px 16px;
+                border-radius: 8px;
+                display: block;
+                font-weight: 500;
+                transition: all 0.2s;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+                .admin-nav a:hover,
+                .admin-nav a.active {
+                    background: #e6d9ff;
+                    color: #651FFF;
+                }
+
+            .admin-nav i {
+                width: 20px;
+                text-align: center;
+                font-size: 1.1rem;
+            }
+
+            /* Home highlight example (if needed) */
+            .admin-nav a[href="/Admin/Dashboard"] {
+                background: linear-gradient(90deg, #E6D9FF, #F0E6FF);
+                color: #651FFF;
+                font-weight: 600;
+            }
+
+                .admin-nav a[href="/Admin/Dashboard"]::after {
+                    content: "▲";
+                    float: right;
+                    font-size: 0.8rem;
+                    color: #651FFF;
+                }
+
+        /* Main Content */
+        .admin-main {
+            flex: 1;
+            padding: 20px 20px 20px 300px; /* Offset for sidebar (match sidebar width + gap) */
+            position: relative;
+        }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+            .admin-header h1 {
+                font-size: 2.2rem;
+                color: #0b0b0b;
+                font-weight: 800;
+                margin: 0;
+            }
+
+        .admin-content {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            min-height: 500px;
+        }
+
+    
+        @@media (max-width: 992px) {
+            .admin-layout
+
+        {
+            flex-direction: column;
+        }
+
+        .admin-sidebar {
+            width: 100%;
+            height: auto;
+            position: static;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .admin-main {
+            padding: 20px;
+        }
+
+        }
+
+        /* Small helpers to ensure clickable areas show pointer */
+        .admin-sidebar a {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <div class="admin-sidebar" role="navigation" aria-label="Admin sidebar">
+            <div class="admin-logo">
+                <img src="~/images/logo design.png" alt="HyMall Logo" />
+            </div>
+
+            <ul class="admin-nav">
+                <li>
+                    <a asp-controller="Admin" asp-action="ViewTenants"
+                       class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Admin" && ViewContext.RouteData.Values["action"]?.ToString() == "ViewTenants" ? "active" : "")">
+                        👥 View Tenants
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Admin" asp-action="EventApprovals"
+                       class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Admin" && ViewContext.RouteData.Values["action"]?.ToString() == "EventApprovals" ? "active" : "")">
+                        ✅ Event Approvals
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Admin" asp-action="Announcements"
+                       class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Admin" && ViewContext.RouteData.Values["action"]?.ToString() == "Announcements" ? "active" : "")">
+                        📢 Announcements
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Admin" asp-action="Calendar"
+                       class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Admin" && ViewContext.RouteData.Values["action"]?.ToString() == "Calendar" ? "active" : "")">
+                        📅 Calendar
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Admin" asp-action="Settings"
+                       class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Admin" && ViewContext.RouteData.Values["action"]?.ToString() == "Settings" ? "active" : "")">
+                        ⚙️ Settings
+                    </a>
+                </li>
+            </ul>
+
+            <!-- LOGOUT BUTTON -->
+            <div style="padding: 0 15px; margin-top: auto;">
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/" method="post">
+                    <button type="submit" style="
+                        width: 100%;
+                        padding: 12px;
+                        background: linear-gradient(90deg, #651FFF, #3382FF);
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        text-align: center;
+                        transition: background 0.2s;
+                    ">
+                        LOGOUT
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="admin-main">
+            <div class="admin-header">
+                <h1>Welcome to Admin Dashboard</h1>
+            </div>
+
+            <div class="admin-content">
+                @RenderBody()
+
+                @if (TempData["Success"] != null)
+                {
+                    <div class="alert alert-success" style="margin-bottom: 20px;">
+                        @TempData["Success"]
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- debug script: logs sidebar anchors and clicks; remove after testing -->
+    <script>
+        (function(){
+          try {
+            const anchors = document.querySelectorAll('.admin-sidebar a');
+            anchors.forEach(a => console.log('Sidebar link:', a.innerText.trim(), '->', a.href, 'raw href:', a.getAttribute('href')));
+
+            anchors.forEach(a => {
+              a.addEventListener('click', function(e) {
+                console.log('CLICK on sidebar link:', a.innerText.trim(), 'href:', a.href, 'defaultPrevented:', e.defaultPrevented);
+              }, true);
+            });
+
+            // Detect any prevented clicks globally
+            document.addEventListener('click', function(e){
+              if(e.defaultPrevented) {
+                console.warn('A click was prevented by some handler. Target:', e.target);
+              }
+            }, true);
+          } catch (err) {
+            console.warn('Sidebar debug script error', err);
+          }
+        })();
+    </script>
+
+    <script src="~/js/site.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,114 @@
+﻿@model HyMall_App.Models.AdminSettings
+@{
+    ViewData["Title"] = "Admin Settings";
+    Layout = "_AdminLayout";
+}
+
+<div style="max-width: 800px; margin: 0 auto; padding: 20px;">
+    <h2>Setting Details</h2>
+    <p>Update your photo and personal details here.</p>
+
+    <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+        <h4>Personal information</h4>
+
+        <form asp-action="Index" method="post">
+            <!-- Full Name + Last Name -->
+            <div style="display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 300px;">
+                    <label asp-for="FirstName" style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Full Name</label>
+                    <input asp-for="FirstName" class="form-control" placeholder="Enter first name" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; font-size: 1rem;" />
+                    <span asp-validation-for="FirstName" class="text-danger" style="font-size: 0.875rem; display: block; margin-top: 4px;"></span>
+                </div>
+                <div style="flex: 1; min-width: 300px;">
+                    <label asp-for="LastName" style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Last Name</label>
+                    <input asp-for="LastName" class="form-control" placeholder="Enter last name" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; font-size: 1rem;" />
+                    <span asp-validation-for="LastName" class="text-danger" style="font-size: 0.875rem; display: block; margin-top: 4px;"></span>
+                </div>
+            </div>
+
+            <!-- Email + Username -->
+            <div style="display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 300px;">
+                    <label asp-for="Email" style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Email Address</label>
+                    <input asp-for="Email" class="form-control" placeholder="Enter email address" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; font-size: 1rem;" />
+                    <span asp-validation-for="Email" class="text-danger" style="font-size: 0.875rem; display: block; margin-top: 4px;"></span>
+                </div>
+                <div style="flex: 1; min-width: 300px;">
+                    <label asp-for="UserName" style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Username</label>
+                    <input asp-for="UserName" class="form-control" placeholder="Enter user name" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; font-size: 1rem;" />
+                    <span asp-validation-for="UserName" class="text-danger" style="font-size: 0.875rem; display: block; margin-top: 4px;"></span>
+                </div>
+            </div>
+
+            <!-- Phone + City -->
+            <div style="display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 300px;">
+                    <label asp-for="PhoneNumber" style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Phone No</label>
+                    <input asp-for="PhoneNumber" class="form-control" placeholder="Enter phone no" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; font-size: 1rem;" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger" style="font-size: 0.875rem; display: block; margin-top: 4px;"></span>
+                </div>
+                <div style="flex: 1; min-width: 300px;">
+                    <label asp-for="City" style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">City</label>
+                    <input asp-for="City" class="form-control" placeholder="Enter your city" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; font-size: 1rem;" />
+                    <span asp-validation-for="City" class="text-danger" style="font-size: 0.875rem; display: block; margin-top: 4px;"></span>
+                </div>
+            </div>
+
+            <!-- Country + Zip Code -->
+            <div style="display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 300px;">
+                    <label asp-for="Country" style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Country Name</label>
+                    <input asp-for="Country" class="form-control" placeholder="Enter country name" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; font-size: 1rem;" />
+                    <span asp-validation-for="Country" class="text-danger" style="font-size: 0.875rem; display: block; margin-top: 4px;"></span>
+                </div>
+                <div style="flex: 1; min-width: 300px;">
+                    <label asp-for="ZipCode" style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Zip code</label>
+                    <input asp-for="ZipCode" class="form-control" placeholder="Enter zip code" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; font-size: 1rem;" />
+                    <span asp-validation-for="ZipCode" class="text-danger" style="font-size: 0.875rem; display: block; margin-top: 4px;"></span>
+                </div>
+            </div>
+
+            <!-- Bio -->
+            <div style="margin-bottom: 20px;">
+                <label asp-for="Bio" style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Bio (Write a short introduction)</label>
+                <select asp-for="Bio" class="form-control" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; font-size: 1rem;">
+                    <option value="Normal text">Normal text</option>
+                    <option value="Professional">Professional</option>
+                    <option value="Casual">Casual</option>
+                    <option value="Enthusiastic">Enthusiastic</option>
+                </select>
+                <span asp-validation-for="Bio" class="text-danger" style="font-size: 0.875rem; display: block; margin-top: 4px;"></span>
+            </div>
+
+            <!-- Cancel & Save Buttons -->
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 30px;">
+                <a href="/Admin/Settings" class="btn btn-secondary" style="
+                    padding: 10px 20px;
+                    background: #fff;
+                    color: #333;
+                    border: 1px solid #ddd;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    text-decoration: none;
+                    transition: all 0.2s;
+                ">Cancel</a>
+                <button type="submit" class="btn btn-primary" style="
+                    padding: 10px 20px;
+                    background: linear-gradient(90deg, #651FFF, #3382FF);
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: background 0.2s;
+                ">
+                    Save
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

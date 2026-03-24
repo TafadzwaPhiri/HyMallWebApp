@@ -1,0 +1,164 @@
+﻿@page
+@model HyMall_App.Areas.Identity.Pages.Account.LoginModel
+@{
+    ViewData["Title"] = "Admin Login";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .login-page {
+            background: #fff;
+            min-height: 100vh;
+            padding: 6rem 5%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            max-width: 500px;
+            width: 100%;
+            background: #fff;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .login-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #0b0b0b;
+            font-weight: 800;
+        }
+
+        .login-subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                color: #333;
+                font-size: 0.95rem;
+            }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 0.8rem;
+            background: #000;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+            .btn-login:hover {
+                background: #333;
+            }
+
+        .login-footer {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        @@media (max-width: 576px) {
+            .login-container {
+                padding: 2rem;
+            }
+
+            .login-title {
+                font-size: 1.6rem;
+            }
+
+            .login-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .form-control {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body class="landing-page">
+
+    <!-- NAVBAR (your design) -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/">
+                <img src="~/images/logo design.png" alt="HyMall Logo" />
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/#overview">Overview</a></li>
+            <li><a href="/#features">Features</a></li>
+            <li><a href="/#about">About HyMall</a></li>
+            <li><a href="/#demo">Demo</a></li>
+            <li><a href="/#faq">FAQ</a></li>
+        </ul>
+        <div class="login-btn">
+            <a asp-action="ChooseRole">BACK</a>
+        </div>
+    </nav>
+
+    <div class="login-page">
+        <div class="login-container">
+            <h1 class="login-title">Welcome back!</h1>
+            <p class="login-subtitle">Enter your Credentials to access your account</p>
+
+            <form id="account" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Input.Email">Email address</label>
+                    <input asp-for="Input.Email" class="form-control" value="admin@hymall.test" readonly />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Input.Password">Password</label>
+                    <input asp-for="Input.Password" type="password" class="form-control" autocomplete="current-password" aria-required="true" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn-login">LOGIN</button>
+            </form>
+
+            <div class="login-footer">
+                © 2025 HyMall Ltd. All Rights Reserved.
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/site.js"></script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+</body>
+</html>

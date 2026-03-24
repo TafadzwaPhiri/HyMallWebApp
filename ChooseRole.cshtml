@@ -1,0 +1,227 @@
+﻿@{
+    ViewData["Title"] = "Choose Your Role";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .choose-role-page {
+            background: linear-gradient(135deg, #EBEDFF, #EDEEFD, #DBF8FF);
+            min-height: 100vh;
+            padding: 6rem 5% 4rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .choose-role-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        /* Left: Decorative Blur Circle */
+        .role-art {
+            flex: 0 0 360px;
+            position: relative;
+            height: 100%;
+        }
+
+            .role-art::before {
+                content: "";
+                position: absolute;
+                top: -80px;
+                left: -80px;
+                width: 400px;
+                height: 500px;
+                background: url('/images/roles image.png') no-repeat center center;
+                background-size: cover;
+                border-radius: 50%;
+                filter: blur(25px) saturate(120%);
+                opacity: 0.85;
+                z-index: 0;
+            }
+
+        /* Right: Role Cards */
+        .role-cards {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .role-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .role-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+            }
+
+            .role-card h3 {
+                margin-top: 0;
+                color: #0b0b0b;
+                font-weight: 700;
+            }
+
+            .role-card p {
+                color: #666;
+                font-size: 0.95rem;
+                margin: 0.5rem 0;
+            }
+
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(90deg, #651FFF, #3382FF);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: #000;
+            padding: 0.6rem 1.2rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #0b0b0b;
+            font-weight: 800;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+            font-size: 1.05rem;
+        }
+
+        @@media (max-width: 992px) {
+            .choose-role-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .role-art {
+                flex: none;
+                width: 100%;
+                height: 200px;
+            }
+
+                .role-art::before {
+                    top: -40px;
+                    left: -40px;
+                    width: 200px;
+                    height: 200px;
+                }
+
+            .role-cards {
+                gap: 1.5rem;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .choose-role-page {
+                padding: 4rem 3% 3rem;
+            }
+
+            .page-title {
+                font-size: 1.6rem;
+            }
+
+            .page-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .role-card {
+                padding: 1.5rem;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body class="landing-page">
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/">
+                <img src="~/images/logo design.png" alt="HyMall Logo" />
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/#overview">Overview</a></li>
+            <li><a href="/#features">Features</a></li>
+            <li><a href="/#about">About HyMall</a></li>
+            <li><a href="/#demo">Demo</a></li>
+            <li><a href="/#faq">FAQ</a></li>
+        </ul>
+        <div class="login-btn">
+            <a href="/">BACK</a> <!-- Go to homepage -->
+        </div>
+    </nav>
+
+    <div class="choose-role-page">
+        <div class="choose-role-container">
+            <div class="role-art"></div>
+            <div class="role-cards">
+                <h1 class="page-title">Choose your role</h1>
+                <p class="page-subtitle">Select which role you want to continue with to access the appropriate dashboard and tools.</p>
+
+                <!-- ADMIN CARD -->
+                <div class="role-card">
+                    <h3>Admin</h3>
+                    <p>Access admin dashboard and management tools.</p>
+                    <p>Recommended for store owners and managers</p>
+                    <a href="/Identity/Account/Login?role=Admin" class="btn-primary">Continue as Admin</a>
+                </div>
+
+                <!-- TENANT CARD -->
+                <div class="role-card">
+                    <h3>Tenant</h3>
+                    <p>Sign up or sign in as a tenant to manage your store.</p>
+                    <p>For merchants and store operators</p>
+                    <a href="/Identity/Account/Register?role=Tenant" class="btn-secondary">Continue as Tenant</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+    <script src="~/js/site.js"></script>
+</body>
+</html>

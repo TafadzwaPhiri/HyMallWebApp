@@ -1,0 +1,68 @@
+﻿@model IEnumerable<HyMall_App.Models.ContactMessage>
+@{
+    ViewData["Title"] = "Announcements";
+    Layout = "_AdminLayout";
+}
+
+<div style="max-width: 800px; margin: 0 auto; padding: 20px;">
+    <h2>Announcements</h2>
+    <p>View and manage contact form submissions.</p>
+
+    <!-- Search Bar -->
+    <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px;">
+        <form method="get" asp-action="Announcements" asp-controller="Admin">
+            <input type="text" name="search" value="@ViewBag.Search" placeholder="Search by subject..." style="
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                font-size: 1rem;
+                background: #f9f9f9;
+            " />
+        </form>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div style="text-align: center; padding: 40px; color: #666;">
+            <p>No messages yet.</p>
+        </div>
+    }
+    else
+    {
+        foreach (var msg in Model)
+        {
+            <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                    <div>
+                        <h4 style="margin: 0; color: #0b0b0b;">@msg.Subject</h4>
+                        <p style="margin: 10px 0 0; color: #666; font-size: 0.95rem;">
+                            From: @msg.FirstName @msg.LastName (@msg.Email)<br />
+                            Phone: @(string.IsNullOrEmpty(msg.Phone) ? "N/A" : msg.Phone)
+                        </p>
+                    </div>
+                    <form asp-action="DeleteAnnouncement" asp-controller="Admin" asp-route-id="@msg.Id" method="post" style="margin: 0;">
+                        <button type="submit" style="
+                                    padding: 6px 12px;
+                                    background: #ffe6e6;
+                                    color: #d32f2f;
+                                    border: none;
+                                    border-radius: 8px;
+                                    font-weight: 600;
+                                    cursor: pointer;
+                                ">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+                <div style="padding-top: 10px; border-top: 1px solid #eee; margin-top: 10px;">
+                    <p style="margin: 0; color: #333; line-height: 1.5;">@msg.Message</p>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

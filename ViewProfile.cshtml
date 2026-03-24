@@ -1,0 +1,18 @@
+﻿@model HyMall_App.Models.TenantProfile
+@{
+    ViewData["Title"] = "Tenant Profile";
+    Layout = "_AdminLayout";
+}
+
+<div style="max-width: 700px; margin: 0 auto; padding: 20px;">
+    <h2>@Model.ShopName</h2>
+    <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); margin-top: 20px;">
+        <p><strong>Category:</strong> @Model.Category</p>
+        <p><strong>Address:</strong> @Model.Address</p>
+        <p><strong>Phone:</strong> @Model.Phone</p>
+        <p><strong>Operating Hours:</strong> @Model.OperatingHours</p>
+        <p><strong>Description:</strong> @Model.Description</p>
+        <p><strong>Tenant ID:</strong> @Model.UserId</p>
+    </div>
+    <a href="/Admin/ViewTenants" style="display: inline-block; margin-top: 20px; color: #651FFF; text-decoration: none;">← Back to Tenants</a>
+</div>

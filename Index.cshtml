@@ -1,0 +1,317 @@
+﻿@{
+    ViewData["Title"] = "HyMall – Real-Time Mall Insights";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#overview">
+                <img src="~/images/logo design.png" alt="HyMall Logo" />
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#overview" class="nav-link active">Overview</a></li>
+            <li><a href="#features" class="nav-link">Features</a></li>
+            <li><a href="#about" class="nav-link">About HyMall</a></li>
+            <li><a href="#demo" class="nav-link">Demo</a></li>
+            <li><a href="#faq" class="nav-link">FAQ</a></li>
+        </ul>
+        <div class="login-btn">
+            <a class="btn btn-primary" asp-action="ChooseRole">LOGIN</a>
+        </div>
+    </nav>
+
+    <!-- HERO / OVERVIEW SECTION -->
+    <section id="overview" class="hero">
+        <!-- left: text content -->
+        <div class="hero-content">
+            <h1>
+                Transforming Mall<br />
+                Management with <span class="gradient-text">Real&#8209;Time Insights</span>
+            </h1>
+            <p class="hero-sub">
+                The HyMall Web Dashboard empowers mall administrators to turn shopper feedback into actionable insights.
+            </p>
+            <div class="cta-buttons">
+                <a class="btn btn-primary" asp-action="ChooseRole">GET STARTED</a>
+                <!-- <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">GET STARTED</a> -->
+                <a href="#features" class="btn-secondary">LEARN MORE</a>
+            </div>
+        </div>
+
+        <!-- right: decorative area (bubbles) -->
+        <div class="hero-right" aria-hidden="false">
+            <div id="bubbles-root" aria-hidden="true"></div>
+        </div>
+
+        <!-- bottom overview row (spans across hero, under CTAs) -->
+        <div class="overview-row" aria-hidden="false">
+            <div class="overview-item">
+                <h4>Evaluate</h4>
+                <p>Evaluate your mall's operational efficiency.</p>
+            </div>
+
+            <div class="overview-item">
+                <h4>Boost</h4>
+                <p>Leverage data to evaluate your mall.</p>
+            </div>
+
+            <div class="overview-item">
+                <h4>Enhance</h4>
+                <p>Unlock secrets to your thriving mall.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FEATURES SECTION -->
+    <section id="features" class="features-section">
+        <h2 class="features-mark" aria-hidden="true">FEATURES</h2>
+        
+        <div class="features-hero">
+            <div class="features-headline">
+                <h3>Explore the powerful insights<br />with HyMall Dashboard</h3>
+                
+            </div>
+        </div>
+
+        <div class="features-list">
+            <!-- Row 1: image left, text right -->
+            <div class="feature-row">
+                <div class="feature-media">
+                    <img src="~/images/feature1.png" alt="Intuitive analytics image" />
+                </div>
+                <div class="feature-content">
+                    <h4><span class="feature-bullet"></span>Intuitive analytics</h4>
+                    <p>Our dashboard lets you visualize issues, trends, and engagement across your malls — all in one unified view.</p>
+                </div>
+            </div>
+
+            <!-- Row 2: image right, text left -->
+            <div class="feature-row reverse">
+                <div class="feature-media">
+                    <img src="~/images/feature2.png" alt="Actionable insights image" />
+                </div>
+                <div class="feature-content">
+                    <h4><span class="feature-bullet"></span>Actionable Insights</h4>
+                    <p>Moderate posts, resolve complaints, and share announcements instantly using our intuitive tools.</p>
+                </div>
+            </div>
+
+            <!-- Row 3: image left, text right -->
+            <div class="feature-row">
+                <div class="feature-media">
+                    <img src="~/images/feature3.png" alt="Admin and tenant access image" />
+                </div>
+                <div class="feature-content">
+                    <h4><span class="feature-bullet"></span>Admin &amp; Tenant Access</h4>
+                    <p>Access tailored dashboards and messaging for both roles with secure data separation and role-based controls.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= ABOUT SECTION (FEATURES-LIKE) ================= -->
+    <section id="about" class="about-section">
+        <h2 class="about-mark" aria-hidden="true">About&nbsp;Us</h2>
+
+        <div class="about-hero">
+            <div class="about-headline">
+                <h3>Discover how HyMall<br />Transforms Mall Management</h3>
+            </div>
+        </div>
+
+        <div class="about-list">
+            <div class="about-content">
+                <p>
+                    HyMall is a smart mall management platform designed to make shopping centers safer,
+                    more efficient, and more connected.
+                </p>
+
+                <p>
+                    Our mobile app allows shoppers and tenants to report issues in real time — whether it’s
+                    poor lighting, broken escalators, or safety concerns. These reports flow into the HyMall
+                    Web Dashboard where administrators gain clear analytics, trends and actionable reports.
+                </p>
+
+                <p>
+                    For tenants, HyMall provides an easy way to manage store issues, publish promotions,
+                    and stay connected with mall management. For administrators, it delivers tools to
+                    resolve problems quickly and communicate directly with tenants.
+                </p>
+
+                <p>
+                    Our mission is to improve the shopping experience by giving malls the tools to respond
+                    faster, work smarter, and build trust with their communities.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- ================= END ABOUT SECTION ================= -->
+
+
+
+    <!-- ================= DEMO SECTION ================= -->
+    <section id="demo" class="demo-section">
+        <h2 class="demo-mark" aria-hidden="true">DEMO</h2>
+
+        <div class="demo-hero">
+            <div class="demo-headline">
+                <h3>Experience The Future of Malls</h3>
+            </div>
+            <!-- Add some spacing -->
+            <div style="margin-top: 30px; text-align: center;">
+                <img src="images/demo.png" alt="Demo" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+
+        <div class="demo-content">
+            <p>
+                Explore our interactive demo to see how HyMall revolutionizes mall management with real-time insights and seamless communication.
+            </p>
+        </div>
+    </section>
+    <!-- ================= END DEMO SECTION ================= -->
+
+
+
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="faq-section" aria-labelledby="faq-headline">
+        <div class="faq-hero">
+            <h2 class="faq-mark" aria-hidden="true">FAQ</h2>
+
+            <div class="faq-headline" id="faq-headline">
+                <h3>Frequently asked<br>questions</h3>
+            </div>
+        </div>
+
+        <div class="faq-content">
+            <!-- LEFT: 3D character image  -->
+            <div class="faq-art" aria-hidden="true">
+                <img src="~/images/faq image.png" alt="HyMall FAQ Character" class="faq-image" />
+            </div>
+
+            <!-- RIGHT: FAQ list  -->
+            <div class="faq-accordion" role="region" aria-label="FAQ list">
+                <div class="faq-intro" id="faq-intro">
+                    <h4>Got Questions?</h4>
+                    <p>Find answers to common questions about the HyMall Dashboard features and functionalities.</p>
+                </div>
+
+                <div class="faq-list" role="list">
+                    <div class="faq-item" role="listitem">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq1">
+                            <span>What is HyMall and how does it work?</span>
+                            <span class="faq-arrow" aria-hidden="true">▾</span>
+                        </button>
+                        <div id="faq1" class="faq-answer" aria-hidden="true">
+                            <p>HyMall is a smart mall management platform that connects shoppers, tenants, and administrators through real-time reporting and analytics. Users report issues via the mobile app; admins view insights on the web dashboard.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" role="listitem">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq2">
+                            <span>How are issues reported through the mobile app?</span>
+                            <span class="faq-arrow" aria-hidden="true">▾</span>
+                        </button>
+                        <div id="faq2" class="faq-answer" aria-hidden="true">
+                            <p>Shoppers and tenants can submit reports by selecting issue categories (lighting, escalators, safety), adding photos or descriptions, and submitting. Reports flow instantly to the admin dashboard.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" role="listitem">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq3">
+                            <span>Does HyMall support multiple languages?</span>
+                            <span class="faq-arrow" aria-hidden="true">▾</span>
+                        </button>
+                        <div id="faq3" class="faq-answer" aria-hidden="true">
+                            <p>Yes! HyMall supports English, Spanish, French, and Arabic. Admins can set default language per mall and users can switch languages in-app settings.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" role="listitem">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq4">
+                            <span>Who can use the HyMall dashboard?</span>
+                            <span class="faq-arrow" aria-hidden="true">▾</span>
+                        </button>
+                        <div id="faq4" class="faq-answer" aria-hidden="true">
+                            <p>The dashboard is designed for mall administrators and authorized tenant managers. Each role has tailored views and permissions to ensure secure, role-based access.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- contact centered below entire section -->
+        <div class="faq-contact-centered">
+            <div class="faq-contact">
+                <h4>Still have Questions?</h4>
+                <p>Reach out to our support team for assistance</p>
+                <a href="/Contact" class="btn-secondary">CONTACT US</a>
+            </div>
+        </div>
+    </section>
+
+
+
+
+   
+  <!-- FOOTER -->
+<footer class="main-footer">
+    <div class="footer-content">
+      
+
+        <!-- CENTER: LINK COLUMNS -->
+        <div class="footer-links">
+            <div class="link-column">
+                <h4>QUICK LINKS</h4>
+                <ul>
+                    <li><a href="#about">About HyMall</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#demo">Demo</a></li>
+                </ul>
+            </div>
+
+            <div class="link-column">
+                <h4>RESOURCES</h4>
+                <ul>
+                    <li><a href="#faq">FAQ's</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="link-column">
+                <h4>LEGAL</h4>
+                <ul>
+                    <li><span>Privacy</span></li>
+                    <li><span>Terms</span></li>
+                    <li><span>Status</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM: COPYRIGHT -->
+    <div class="footer-bottom">
+            <p>HyMall Ltd @@ 2025<br />All Rights Reserved</p>
+
+    </div>
+</footer>
+
+    <!-- JS: main site script (nav behavior + bubbles animation) -->
+    <script src="~/js/site.js"></script>
+</body>
+</html>

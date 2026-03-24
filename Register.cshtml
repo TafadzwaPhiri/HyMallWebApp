@@ -1,0 +1,229 @@
+﻿@page
+@model HyMall_App.Areas.Identity.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Tenant Sign Up";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .register-page {
+            background: #fff;
+            min-height: 100vh;
+            padding: 6rem 5%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .register-container {
+            max-width: 500px;
+            width: 100%;
+            background: #fff;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .register-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #0b0b0b;
+            font-weight: 800;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                color: #333;
+                font-size: 0.95rem;
+            }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .btn-signup {
+            width: 100%;
+            padding: 0.8rem;
+            background: #000;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+            .btn-signup:hover {
+                background: #333;
+            }
+
+        .btn-register {
+            display: inline-block;
+            margin-top: 0.8rem;
+            padding: 0.6rem 1.2rem;
+            background: linear-gradient(135deg, #000, #444);
+            color: #fff;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+            .btn-register:hover {
+                background: linear-gradient(135deg, #222, #555);
+                transform: translateY(-2px);
+            }
+
+        .login-footer {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        #passwordMatchError {
+            color: #d32f2f;
+            font-size: 0.875rem;
+            display: none;
+            margin-top: 0.25rem;
+        }
+
+        @@media (max-width: 576px) {
+            .register-container {
+                padding: 2rem;
+            }
+
+            .register-title {
+                font-size: 1.6rem;
+            }
+
+            .form-control {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body class="landing-page">
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/">
+                <img src="~/images/logo design.png" alt="HyMall Logo" />
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/#overview">Overview</a></li>
+            <li><a href="/#features">Features</a></li>
+            <li><a href="/#about">About HyMall</a></li>
+            <li><a href="/#demo">Demo</a></li>
+            <li><a href="/#faq">FAQ</a></li>
+        </ul>
+        <div class="login-btn">
+            <a asp-controller="Home" asp-action="ChooseRole">BACK</a>
+        </div>
+    </nav>
+
+    <div class="register-page">
+        <div class="register-container">
+            <h1 class="register-title">Get Started Now</h1>
+
+            <form id="registerForm" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Input.Name">Full Name</label>
+                    <input asp-for="Input.Name" class="form-control" placeholder="Full Name" />
+                    <span asp-validation-for="Input.Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Input.Email">Email Address</label>
+                    <input asp-for="Input.Email" class="form-control" autocomplete="email" aria-required="true" placeholder="Email Address" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Input.Password">Password</label>
+                    <input asp-for="Input.Password" id="password" type="password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                    <input asp-for="Input.ConfirmPassword" id="confirmPassword" type="password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm Password" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    <div id="passwordMatchError">Passwords do not match.</div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Input.Role">Role</label>
+                    <select asp-for="Input.Role" class="form-control">
+                        <option value="Tenant">Tenant</option>
+                    </select>
+                    <span asp-validation-for="Input.Role" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn-signup">SIGN UP</button>
+            </form>
+            <div class="login-footer">
+                <p>Already have an account?</p>
+                <a asp-area="Identity" asp-page="/Account/TenantLogin" class="btn-register">LOGIN HERE</a>
+            </div>
+
+            <div class="login-footer">
+                © 2025 HyMall Ltd. All Rights Reserved.
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/site.js"></script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirmPassword');
+            const error = document.getElementById('passwordMatchError');
+            const submitBtn = document.querySelector('.btn-signup');
+
+            function validatePasswords() {
+                if (password.value && confirmPassword.value) {
+                    if (password.value !== confirmPassword.value) {
+                        error.style.display = 'block';
+                        submitBtn.disabled = true;
+                    } else {
+                        error.style.display = 'none';
+                        submitBtn.disabled = false;
+                    }
+                } else {
+                    error.style.display = 'none';
+                    submitBtn.disabled = false;
+                }
+            }
+
+            password.addEventListener('input', validatePasswords);
+            confirmPassword.addEventListener('input', validatePasswords);
+        });
+    </script>
+</body>
+</html>

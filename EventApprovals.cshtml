@@ -1,0 +1,122 @@
+﻿@model IEnumerable<HyMall_App.Models.Event>
+@{
+    ViewData["Title"] = "Event Approvals";
+    Layout = "_AdminLayout";
+}
+
+<div style="max-width: 800px; margin: 0 auto; padding: 20px;">
+    <h2>Event Approvals</h2>
+    <p>Review and manage tenant-submitted events.</p>
+
+    <!-- Search & Filter -->
+    <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+        <form method="get" style="flex: 1; min-width: 300px;">
+            <input type="text" name="search" value="@ViewBag.Search" placeholder="Search events..." style="
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                font-size: 1rem;
+                background: #f9f9f9;
+            " />
+        </form>
+
+        <form method="get" style="flex: 0 0 150px;">
+            <select name="status" style="
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                font-size: 1rem;
+                background: #f9f9f9;
+            ">
+                <option value="">All</option>
+                <option value="Pending" selected="@(ViewBag.Status == "Pending")">Pending</option>
+                <option value="Approved" selected="@(ViewBag.Status == "Approved")">Approved</option>
+                <option value="Rejected" selected="@(ViewBag.Status == "Rejected")">Rejected</option>
+            </select>
+        </form>
+
+        <button type="submit" formaction="/Admin/EventApprovals" style="
+            padding: 10px 20px;
+            background: linear-gradient(90deg, #651FFF, #3382FF);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        ">Filter</button>
+    </div>
+
+    <!-- Events List -->
+    @if (!Model.Any())
+    {
+        <div style="text-align: center; padding: 40px; color: #666; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <p>No events found.</p>
+        </div>
+    }
+    else
+    {
+        foreach (var e in Model)
+        {
+            <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                    <div>
+                        <h4 style="margin: 0; color: #0b0b0b;">@e.Title</h4>
+                        <p style="margin: 10px 0 0; color: #666; font-size: 0.95rem;">
+                            <strong>Submitted by:</strong> @e.SubmittedBy<br/>
+                            <strong>Location:</strong> @e.Location
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        @if (e.Status == "Pending")
+                        {
+                            <form asp-action="ApproveEvent" asp-controller="Admin" asp-route-id="@e.Id" method="post" style="margin: 0;">
+                                <button type="submit" style="
+                                    padding: 6px 12px;
+                                    background: #e6d9ff;
+                                    color: #651FFF;
+                                    border: none;
+                                    border-radius: 8px;
+                                    font-weight: 600;
+                                    cursor: pointer;
+                                ">Approve</button>
+                            </form>
+                            <form asp-action="RejectEvent" asp-controller="Admin" asp-route-id="@e.Id" method="post" style="margin: 0;">
+                                <button type="submit" style="
+                                    padding: 6px 12px;
+                                    background: #ffe6e6;
+                                    color: #d32f2f;
+                                    border: none;
+                                    border-radius: 8px;
+                                    font-weight: 600;
+                                    cursor: pointer;
+                                ">Reject</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <span style="font-weight: 600; color: @(e.Status == "Approved" ? "#4CAF50" : "#d32f2f");">
+                                @(e.Status == "Approved" ? "✅ Approved" : "❌ Rejected")
+                            </span>
+                        }
+                    </div>
+                </div>
+                <div style="padding-top: 10px; border-top: 1px solid #eee; margin-top: 10px;">
+                    <p style="margin: 0; color: #333; line-height: 1.5;">@e.Description</p>
+                    @if (!string.IsNullOrEmpty(e.Reason))
+                    {
+                        <p style="margin: 8px 0 0; color: #d32f2f; font-size: 0.9rem;">
+                            <strong>Rejection reason:</strong> @e.Reason
+                        </p>
+                    }
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
