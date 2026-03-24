@@ -1,0 +1,38 @@
+[
+  {
+    "Id": 1,
+    "Title": "Community Clean-up",
+    "Category": "Sanitation",
+    "Date": "2025-11-11T18:48:35.0626018Z",
+    "Description": "Volunteers needed to clean the park.",
+    "Priority": 5,
+    "Tags": [
+      "clean-up",
+      "park"
+    ]
+  },
+  {
+    "Id": 2,
+    "Title": "Roadworks Notice",
+    "Category": "Roads",
+    "Date": "2025-11-15T18:48:35.0778797Z",
+    "Description": "Scheduled pothole repairs on Main St.",
+    "Priority": 7,
+    "Tags": [
+      "roads",
+      "repairs"
+    ]
+  },
+  {
+    "Id": 3,
+    "Title": "Electricity Safety Workshop",
+    "Category": "Utilities",
+    "Date": "2025-11-18T18:48:35.0911249Z",
+    "Description": "Tips on safe electricity use.",
+    "Priority": 4,
+    "Tags": [
+      "safety",
+      "workshop"
+    ]
+  }
+]

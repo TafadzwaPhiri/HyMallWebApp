@@ -1,0 +1,14 @@
+﻿@model MunicipalityApp.Models.ServiceRequest
+@{
+    ViewData["Title"] = "Service Request Details";
+}
+<div class="max-w-3xl mx-auto">
+    <div class="bg-white rounded-xl p-6 shadow">
+        <h2 class="text-2xl font-semibold text-[#6b4f3b]">@Model.Title</h2>
+        <div class="text-sm text-gray-500">Priority: @Model.Priority • Status: @Model.Status</div>
+        <p class="mt-4 text-gray-700">@Model.Details</p>
+        <div class="mt-6">
+            <a href="/ServiceRequests" class="px-3 py-2 rounded-full border border-gray-300">Back</a>
+        </div>
+    </div>
+</div>

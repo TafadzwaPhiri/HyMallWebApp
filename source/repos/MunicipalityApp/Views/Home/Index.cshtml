@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "Main Menu";
+}
+
+<!-- Full Background Container -->
+<div class="relative min-h-screen bg-cover bg-center bg-fixed" style="background-image: url('/uploads/WebBackPhoto.webp');">
+
+    <!-- Overlay for slight dim effect -->
+    <div class="absolute inset-0 bg-black/20"></div>
+
+    <!-- Page Content -->
+    <div class="relative z-10">
+
+        <!-- Navbar -->
+        <nav class="bg-white/90 backdrop-blur-md shadow-md p-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <!-- Optional Logo -->
+                <!-- <img src="~/images/logo.png" alt="Logo" class="w-8 h-8 rounded-full" /> -->
+                <h1 class="text-[#3E7C17] font-bold text-xl">Municipal Services App</h1>
+            </div>
+            <div>
+                <a asp-controller="Home" asp-action="Index"
+                   class="bg-[#3E7C17] text-white px-4 py-2 rounded-lg hover:bg-[#2f6e13] transition">
+                    Back to Home
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Menu Cards -->
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-wrap justify-center gap-8">
+
+                <!-- REPORT ISSUES -->
+                <div class="bg-white/95 rounded-2xl p-6 shadow-lg w-64 h-[26rem] flex flex-col justify-between hover:-translate-y-2 transition">
+                    <div>
+                        <div class="text-sm text-gray-500">Task 1</div>
+                        <h2 class="text-2xl font-semibold text-[#5C4033] mt-2">Report Issues</h2>
+                        <p class="mt-2 text-gray-600 text-sm">
+                            Report sanitation, roads, utilities and other local civic issues. Attach photos or documents.
+                        </p>
+                    </div>
+                    <a asp-controller="Issues" asp-action="Report"
+                       class="inline-block bg-[#3A8A4A] text-white text-center px-5 py-2 rounded-full hover:bg-[#327d41] transition">
+                        Start Report
+                    </a>
+                </div>
+
+                <!-- LOCAL EVENTS -->
+                <div class="bg-white/95 rounded-2xl p-6 shadow-lg w-64 h-[26rem] flex flex-col justify-between hover:-translate-y-2 transition">
+                    <div>
+                        <div class="text-sm text-gray-500">Task 2</div>
+                        <h2 class="text-2xl font-semibold text-[#5C4033] mt-2">Local Events & Announcements</h2>
+                        <p class="mt-2 text-gray-600 text-sm">
+                            View or post local events and announcements for your area.
+                        </p>
+                    </div>
+                    <a asp-controller="Events" asp-action="Index"
+                       class="inline-block bg-[#3A8A4A] text-white text-center px-5 py-2 rounded-full hover:bg-[#327d41] transition">
+                        Go to Events
+                    </a>
+                </div>
+
+                <!-- SERVICE REQUEST STATUS -->
+                <div class="bg-white/95 rounded-2xl p-6 shadow-lg w-64 h-[26rem] flex flex-col justify-between hover:-translate-y-2 transition">
+                    <div>
+                        <div class="text-sm text-gray-500">Task 3</div>
+                        <h2 class="text-2xl font-semibold text-[#5C4033] mt-2">Service Request Status</h2>
+                        <p class="mt-2 text-gray-600 text-sm">
+                            Track the progress of your submitted service requests and stay updated.
+                        </p>
+                    </div>
+                    <a asp-controller="ServiceRequest" asp-action="Index"
+                       class="inline-block bg-[#3A8A4A] text-white text-center px-5 py-2 rounded-full hover:bg-[#327d41] transition">
+                        Track Status
+                    </a>
+                </div>
+
+                <!-- ALL REPORTS -->
+                <div class="bg-white/95 rounded-2xl p-6 shadow-lg w-64 h-[26rem] flex flex-col justify-between hover:-translate-y-2 transition">
+                    <div>
+                        <div class="text-sm text-gray-500">Task 4</div>
+                        <h2 class="text-2xl font-semibold text-[#5C4033] mt-2">All Reports</h2>
+                        <p class="mt-2 text-gray-600 text-sm">
+                            View all submitted reports and check their details and progress.
+                        </p>
+                    </div>
+                    <a href="/Issues/AllReports"
+                       class="inline-block bg-[#3A8A4A] text-white text-center px-5 py-2 rounded-full hover:bg-[#327d41] transition">
+                        View Reports
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="mt-10 text-center text-sm text-gray-100 drop-shadow">
+                <p>💡 Tip: Use clear photos and exact locations to speed up resolution.</p>
+            </div>
+        </div>
+    </div>
+</div>

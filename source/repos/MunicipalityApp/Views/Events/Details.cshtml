@@ -1,0 +1,15 @@
+﻿@model MunicipalityApp.Models.EventItem
+@{
+    ViewData["Title"] = "Event Details";
+}
+<div class="max-w-4xl mx-auto">
+    <div class="bg-white rounded-xl p-6 shadow">
+        <h2 class="text-2xl font-semibold text-[#6b4f3b]">@Model.Title</h2>
+        <div class="text-sm text-gray-500">@Model.Category • @Model.Date.ToString("f")</div>
+        <p class="mt-4 text-gray-700">@Model.Description</p>
+        <div class="mt-4 text-sm text-gray-600">Tags: @string.Join(", ", Model.Tags)</div>
+        <div class="mt-6">
+            <a href="/Events" class="px-3 py-2 rounded-full border border-gray-300">Back to Events</a>
+        </div>
+    </div>
+</div>
